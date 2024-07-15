@@ -19,7 +19,7 @@ Feature: Registration
     Scenario Outline: User already exists
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
-      And cklick on next
+      And click on next
       Then Error Page opens with User exists Message
 
       Examples:
@@ -50,7 +50,7 @@ Feature: Registration
     Scenario Outline: Password doesn't match
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password>, <passwordConfirm>
-      Then <ErrorMessage> appear
+      Then <ErrorMessage> appears
 
       Examples:
         | email        | password    | passwordConfirm | ErrorMessage         |
