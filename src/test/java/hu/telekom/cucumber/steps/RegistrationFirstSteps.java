@@ -1,6 +1,7 @@
 package hu.telekom.cucumber.steps;
 
 import hu.telekom.pageobjects.HomePageObject;
+import hu.telekom.pageobjects.RegistrationFirstPageObject;
 import hu.telekom.tests.BaseTest;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,6 +11,7 @@ import io.cucumber.java.en.When;
 public class RegistrationFirstSteps extends BaseTest {
 
     private HomePageObject homePage;
+    private RegistrationFirstPageObject registrationFirstPageObject;
 
     @Given("I open Tesco website")
     public void iOpenTescoWebsite () {
@@ -33,6 +35,7 @@ public class RegistrationFirstSteps extends BaseTest {
 
     @And("click on next")
     public void clickOnNext () {
+        registrationFirstPageObject.clickOnNext();
     }
 
     @Then("Registration SecondPage will open")
@@ -48,10 +51,10 @@ public class RegistrationFirstSteps extends BaseTest {
     }
 
     @Then("<ErrorMessage> appears")
-    public void errormessageAppear () {
+    public void errorMassageAppears () {
+
+
     }
 
-    @When("I fill out the Registration Page with user Information <email> and <password>, <passwordConfirm>")
-    public void iFillOutTheRegistrationPageWithUserInformationEmailAndPasswordPasswordConfirm () {
-    }
+
 }

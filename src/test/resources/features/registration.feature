@@ -39,7 +39,7 @@ Feature: Registration
     Scenario Outline: Wrong Password credentials
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password>
-      Then <ErrorMessage> appear
+      Then <ErrorMessage> appears
 
       Examples:
         | email        | password | ErrorMessage
@@ -49,7 +49,7 @@ Feature: Registration
 
     Scenario Outline: Password doesn't match
       Given I click on Registration Button
-      When I fill out the Registration Page with user Information <email> and <password>, <passwordConfirm>
+      When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
       Then <ErrorMessage> appears
 
       Examples:
