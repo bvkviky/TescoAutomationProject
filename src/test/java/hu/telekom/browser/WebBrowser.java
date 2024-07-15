@@ -37,10 +37,7 @@ public class WebBrowser {
                 ffOptions.setBinary(WebBrowserSettings.getPathToFirefox());
                 driver = new FirefoxDriver(ffOptions);
                 break;
-            case SafariWDM:
-                WebDriverManager.safaridriver().setup();
-                driver = new SafariDriver();
-                break;
+
             case EdgeWDM:
                 edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments(new String[]{"--remote-allow-origins=*"});

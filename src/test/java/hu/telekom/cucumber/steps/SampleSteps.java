@@ -1,4 +1,4 @@
-package hu.telekom.cucumber.storys;
+package hu.telekom.cucumber.steps;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
