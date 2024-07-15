@@ -1,21 +1,30 @@
 package hu.telekom.cucumber.steps;
 
+import hu.telekom.pageobjects.HomePageObject;
+import hu.telekom.tests.BaseTest;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RegistrationFirstSteps {
+public class RegistrationFirstSteps extends BaseTest {
+
+    private HomePageObject homePage;
+
     @Given("I open Tesco website")
     public void iOpenTescoWebsite () {
+        driver.get(baseURL);
+        homePage = new HomePageObject(driver);
     }
 
     @And("I accept privacy policy")
     public void iAcceptPrivacyPolicy () {
+        homePage.clicklOnPrivacyPolicy();
     }
 
     @Given("I click on Registration Button")
     public void iClickOnRegistrationButton () {
+        homePage.clickOnRegistrationButton();
     }
 
     @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
