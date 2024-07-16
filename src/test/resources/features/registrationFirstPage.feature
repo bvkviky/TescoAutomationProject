@@ -3,15 +3,13 @@ Feature: Registration
   Rule: Registration Page is available
 
 
-    Scenario Outline: Create new User FirstStep
+    Scenario : Create new User FirstStep
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
       And click on next
       Then Registration SecondPage will open
 
-      Examples:
-        | email                  | password   | passwordConfirm |
-        | random_email@random.hu | Asdfghjk88 | Asdfghjk88      |
+
 
     Scenario Outline: User already exists
       Given I click on Registration Button
