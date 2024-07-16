@@ -29,12 +29,14 @@ public class WebBrowser {
                 chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation", "disable-logging"});
                 chromeOptions.setBinary(WebBrowserSettings.getPathToChrome());
                 chromeOptions.addArguments(new String[]{"--remote-allow-origins=*"});
+                chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
                 driver = new ChromeDriver(chromeOptions);
                 break;
             case Firefox:
                 System.setProperty("webdriver.gecko.driver", WebBrowserSettings.getPathToGeckoDriver());
                 ffOptions = new FirefoxOptions();
                 ffOptions.setBinary(WebBrowserSettings.getPathToFirefox());
+                ffOptions.addArguments("--disable-blink-features=AutomationControlled");
                 driver = new FirefoxDriver(ffOptions);
                 break;
 
@@ -42,6 +44,7 @@ public class WebBrowser {
                 edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments(new String[]{"--remote-allow-origins=*"});
                 edgeOptions.setCapability("acceptInsecureCerts", true);
+                edgeOptions.addArguments("--disable-blink-features=AutomationControlled");
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver(edgeOptions);
         }

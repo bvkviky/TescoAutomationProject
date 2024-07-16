@@ -9,30 +9,25 @@ Feature: Registration
     Scenario Outline: Create new User FirstStep
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
-      And cklick on next
+      And click on next
       Then Registration SecondPage will open
 
       Examples:
         | email        | password   | passwordConfirm |
-        | test@test.de | Asdfghjk88 | Asdfghjk88      |
+        | random_email | Asdfghjk88 | Asdfghjk88      |
 
-    Scenario: User already exists
+    Scenario Outline: User already exists
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
       And click on next
       Then Error Page opens with User exists Message
 
 
-
-    Scenario Outline: User already exists
-      Given I click on Registration Button
-      When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
-      And cklick on next
-      Then Error Page opens with User exists Message
-
       Examples:
         | email        | password   | passwordConfirm |
         | test@test.de | Asdfghjk88 | Asdfghjk88      |
+
+
 
     Scenario Outline: Wrong Password credentials
       Given I click on Registration Button
@@ -40,7 +35,7 @@ Feature: Registration
       Then <ErrorMessage> appears
 
       Examples:
-        | email        | password | ErrorMessage
+        | email        | password | ErrorMessage                                                                                                              |
         | test@test.de | asdfgh   | Password must be at least 8 letters and must include both numbers and letters. Password must contain at least one number. |
         | test@test.de | asdfgh1  | Password must be at least 8 letters and must include both numbers and letters.                                            |
         | test@test.de | asdfghjk | Password must contain at least one number.                                                                                |
@@ -61,4 +56,4 @@ Feature: Registration
 
       Examples:
         | email        | ErrorMessage                                        |
-        | test@test.de | Invalid email address Don't forget to include the @ |
+        | invalidemail | Invalid email address Don't forget to include the @ |

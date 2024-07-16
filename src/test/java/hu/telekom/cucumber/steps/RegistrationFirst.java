@@ -3,36 +3,30 @@ package hu.telekom.cucumber.steps;
 import hu.telekom.pageobjects.HomePageObject;
 import hu.telekom.pageobjects.RegistrationFirstPageObject;
 import hu.telekom.tests.BaseTest;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class RegistrationFirstSteps extends BaseTest {
+import java.util.Random;
+
+public class RegistrationFirst extends BaseTest {
 
     private HomePageObject homePage;
     private RegistrationFirstPageObject registrationFirstPageObject;
 
-
-    //@BeforeEach
-  /*  @Given("I open Tesco website")
-    public void iOpenTescoWebsite () {
-        driver.get(baseURL);
+    @BeforeAll
+    public void setUp() {
+        super.setup();
         homePage = new HomePageObject(driver);
+        registrationFirstPageObject = new RegistrationFirstPageObject(driver);
+        homePage.clickOnPrivacyPolicy();
     }
-
-    @And("I accept privacy policy")
-    public void iAcceptPrivacyPolicy () {
-        homePage.clicklOnPrivacyPolicy();
-    }*/
 
     @Given("I click on Registration Button")
     public void iClickOnRegistrationButton () {
         homePage.clickOnRegistrationButton();
-    }
-
-    @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
-    public void iFillOutTheRegistrationPageWithUserInformationEmailAndPasswordAndPasswordConfirm () {
     }
 
     @And("click on next")
@@ -40,22 +34,27 @@ public class RegistrationFirstSteps extends BaseTest {
         registrationFirstPageObject.clickOnNext();
     }
 
-    @Then("Registration SecondPage will open")
-    public void registrationSecondPageWillOpen () {
+
+    @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
+    public void fillAllUserInformation(String email, String password) {
+
+            email = registrationFirstPageObject.generateRandomEmail();
+
+        registrationFirstPageObject.fillOutRegistrationForm(email, password, password);
     }
 
-    @Then("Error Page opens with User exists Message")
-    public void errorPageOpensWithUserExistsMessage () {
-    }
+
 
     @When("I fill out the Registration Page with user Information <email> and <password>")
-    public void iFillOutTheRegistrationPageWithUserInformationEmailAndPassword () {
+    public void fillOutEmailPW() {
     }
 
     @Then("<ErrorMessage> appears")
-    public void errorMassageAppears () {
+    public void errorMessageAppears() {
+    }
 
-
+    @When("I fill out the Registration Page with user Information <email>")
+    public void fillOutEmailOnly() {
     }
 
 

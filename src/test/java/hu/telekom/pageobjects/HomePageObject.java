@@ -26,7 +26,7 @@ public class HomePageObject {
 
 
     //Methods
-    public void clicklOnPrivacyPolicy () {
+    public void clickOnPrivacyPolicy () {
         privacyPolicyElement.click();
     }
 
