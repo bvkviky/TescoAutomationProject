@@ -13,18 +13,16 @@ Feature: Registration
       Then Registration SecondPage will open
 
       Examples:
-        | email        | password    | passwordConfirm |
-        | test@test.de | Azthiszem88 | Azthiszem88     |
+        | email        | password   | passwordConfirm |
+        | test@test.de | Asdfghjk88 | Asdfghjk88      |
 
-    Scenario Outline: User already exists
+    Scenario: User already exists
       Given I click on Registration Button
       When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
       And click on next
       Then Error Page opens with User exists Message
 
-      Examples:
-        | email              | password    | passwordConfirm |
-        | bvk.viky@gmail.com | Azthiszem88 | Azthiszem88     |
+
 
     Scenario Outline: User already exists
       Given I click on Registration Button
@@ -33,8 +31,8 @@ Feature: Registration
       Then Error Page opens with User exists Message
 
       Examples:
-        | email              | password    | passwordConfirm |
-        | bvk.viky@gmail.com | Azthiszem88 | Azthiszem88     |
+        | email        | password   | passwordConfirm |
+        | test@test.de | Asdfghjk88 | Asdfghjk88      |
 
     Scenario Outline: Wrong Password credentials
       Given I click on Registration Button
@@ -53,5 +51,14 @@ Feature: Registration
       Then <ErrorMessage> appears
 
       Examples:
-        | email        | password    | passwordConfirm | ErrorMessage         |
-        | test@test.de | Azthiszem88 | azthiszem88     | Passwords must match |
+        | email        | password   | passwordConfirm | ErrorMessage         |
+        | test@test.de | Asdfghjk88 | Asdfghjk88      | Passwords must match |
+
+    Scenario Outline: Invalid email address
+      Given I click on Registration Button
+      When I fill out the Registration Page with user Information <email>
+      Then <ErrorMessage> appears
+
+      Examples:
+        | email        | ErrorMessage                                        |
+        | test@test.de | Invalid email address Don't forget to include the @ |
