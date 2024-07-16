@@ -1,24 +1,26 @@
-Feature: Modify Language
+Feature: The user shall be able to do change the language in BudapestGO
 
-  Rule: Language modification is allowed to hungarian or english
+  Background:
+    Given I open the main page
+    And I accept cookies
 
-    Background:
-      Given I open BKK website
-      And I accept privacy policy
+  Rule: Allow to change the language
 
-    Scenario: When I press the Hungarian flag button, language changes to Hungarian
-      Given language is set to 'English'
-      When I click on the 'Hungarian' flag
-      Then language is changed to 'Hungarian'
+    Scenario Outline: Change language
+      Given language is set to "<language>"
+      When I change the language to "<newLanguage>"
+      Then it shows elements in "<newLanguage>"
 
-    Scenario: When I press the English flag button, language changes to English
-      Given language is set to 'Hungarian'
-      When I click on the 'English' flag
-      Then language is changed to 'English'
+      Examples:
+        | language  | newLanguage |
+        | hungarian | english     |
+        | english   | hungarian   |
 
-    Scenario: Change language
-      Given language is set to 'English'
-      When I click on the 'Hungarian' flag
-      Then language is changed to 'Hungarian'
-      When I click on the 'English' flag
-      Then language is changed to 'English'
+    Scenario: Change language with data table
+      Given language is set to "english"
+      When I change the language to
+
+        | nyelv     | kod |
+        | hungarian | HUN |
+        | english   | ENG |
+      Then it shows elements in "english"

@@ -13,7 +13,9 @@ public class RegistrationFirstSteps extends BaseTest {
     private HomePageObject homePage;
     private RegistrationFirstPageObject registrationFirstPageObject;
 
-    @Given("I open Tesco website")
+
+    //@BeforeEach
+  /*  @Given("I open Tesco website")
     public void iOpenTescoWebsite () {
         driver.get(baseURL);
         homePage = new HomePageObject(driver);
@@ -22,7 +24,7 @@ public class RegistrationFirstSteps extends BaseTest {
     @And("I accept privacy policy")
     public void iAcceptPrivacyPolicy () {
         homePage.clicklOnPrivacyPolicy();
-    }
+    }*/
 
     @Given("I click on Registration Button")
     public void iClickOnRegistrationButton () {
