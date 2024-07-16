@@ -36,6 +36,34 @@ public class RegistrationFirstPageObject {
         nextButton.click();
     }
 
+    public String generatePassword() {
+        String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+        String numbers = "0123456789";
+        String allCharacters = upperCaseLetters + lowerCaseLetters + numbers;
+
+        StringBuilder password = new StringBuilder();
+        Random random = new Random();
+
+        password.append(upperCaseLetters.charAt(random.nextInt(upperCaseLetters.length())));
+        password.append(lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length())));
+        password.append(numbers.charAt(random.nextInt(numbers.length())));
+
+        for (int i = 3; i < 8; i++) {
+            password.append(allCharacters.charAt(random.nextInt(allCharacters.length())));
+        }
+        char[] passwordArray = password.toString().toCharArray();
+        for (int i = 0; i < passwordArray.length; i++) {
+            int randomIndex = random.nextInt(passwordArray.length);
+            char temp = passwordArray[i];
+            passwordArray[i] = passwordArray[randomIndex];
+            passwordArray[randomIndex] = temp;
+        }
+
+        return new String(passwordArray);
+
+    }
+
     public String generateRandomEmail () {
         String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder email = new StringBuilder();
