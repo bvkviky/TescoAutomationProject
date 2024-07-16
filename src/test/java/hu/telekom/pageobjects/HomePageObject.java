@@ -10,10 +10,10 @@ public class HomePageObject {
 
 
     //UI Elements
-    @FindBy(xpath = "//span[text()='Accept all cookies']")
+    @FindBy(xpath = "//button[@class='styled__StyledTextButton-sc-8hxn3m-0 jyQVJq ddsweb-cookies-notification__button ddsweb-button ddsweb-button--text-button' and span='Accept all cookies']")
     WebElement privacyPolicyElement;
 
-    @FindBy(xpath = "//span[text()='Register']")
+    @FindBy(xpath = "//a[@class='button button-secondary']")
     WebElement registrationButtonElement;
 
 

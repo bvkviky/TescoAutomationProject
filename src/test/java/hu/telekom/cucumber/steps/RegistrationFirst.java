@@ -3,6 +3,7 @@ package hu.telekom.cucumber.steps;
 import hu.telekom.pageobjects.HomePageObject;
 import hu.telekom.pageobjects.RegistrationFirstPageObject;
 import hu.telekom.tests.BaseTest;
+import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -16,13 +17,14 @@ public class RegistrationFirst extends BaseTest {
     private HomePageObject homePage;
     private RegistrationFirstPageObject registrationFirstPageObject;
 
-    @BeforeAll
+    @Before
     public void setUp() {
-        super.setup();
+        super.setup(); // Call the setup method from BaseTest
         homePage = new HomePageObject(driver);
         registrationFirstPageObject = new RegistrationFirstPageObject(driver);
         homePage.clickOnPrivacyPolicy();
     }
+
 
     @Given("I click on Registration Button")
     public void iClickOnRegistrationButton () {
@@ -36,11 +38,12 @@ public class RegistrationFirst extends BaseTest {
 
 
     @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
-    public void fillAllUserInformation(String email, String password) {
+    public void fillAllUserInformation(String email, String password, String passwordConfirm) throws Exception {
+       if (registrationFirstPageObject.isEmailValid(email))
+           email = registrationFirstPageObject.generateRandomEmail();
 
-            email = registrationFirstPageObject.generateRandomEmail();
+        registrationFirstPageObject.fillOutRegistrationForm(email, password, passwordConfirm);
 
-        registrationFirstPageObject.fillOutRegistrationForm(email, password, password);
     }
 
 

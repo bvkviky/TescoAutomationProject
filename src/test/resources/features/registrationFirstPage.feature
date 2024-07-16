@@ -2,9 +2,6 @@ Feature: Registration
 
   Rule: Registration Page is available
 
-    Background:
-      Given I open Tesco website
-      And I accept privacy policy
 
     Scenario Outline: Create new User FirstStep
       Given I click on Registration Button
@@ -13,8 +10,8 @@ Feature: Registration
       Then Registration SecondPage will open
 
       Examples:
-        | email        | password   | passwordConfirm |
-        | random_email | Asdfghjk88 | Asdfghjk88      |
+        | email                  | password   | passwordConfirm |
+        | random_email@random.hu | Asdfghjk88 | Asdfghjk88      |
 
     Scenario Outline: User already exists
       Given I click on Registration Button
