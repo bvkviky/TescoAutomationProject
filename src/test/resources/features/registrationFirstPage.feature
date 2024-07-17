@@ -2,27 +2,25 @@ Feature: Registration
 
   Rule: Registration Page is available
 
+    Background:
+      Given Open Tesco website
+      And Accept privacy policy
 
     Scenario : Create new User FirstStep
-      Given I click on Registration Button
-      When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
+      And navigate to Registration Page
+      When Register with User Information <email> and <password> and <passwordConfirm>
       And click on next
       Then Registration SecondPage will open
 
 
 
-    Scenario Outline: User already exists
-      Given I click on Registration Button
-      When I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>
-      And click on next
-      Then Error Page opens with User exists Message
+    Scenario: User already exists
+      Given navigate to Registration Page
+      When register with "test@test.com" and "Password123"
+      Then New Page opens with User exists Message "Ezt az email címet már regisztráltuk"
 
 
-      Examples:
-        | email        | password   | passwordConfirm |
-        | test@test.de | Asdfghjk88 | Asdfghjk88      |
-
-
+# _____________________________________________________________________________________________________________
 
     Scenario Outline: Wrong Password credentials
       Given I click on Registration Button

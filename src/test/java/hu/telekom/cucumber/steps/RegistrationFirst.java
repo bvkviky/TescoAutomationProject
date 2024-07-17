@@ -5,56 +5,61 @@ import hu.telekom.pageobjects.RegistrationFirstPageObject;
 import hu.telekom.tests.BaseTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.util.Random;
-
 public class RegistrationFirst extends BaseTest {
+
 
     private HomePageObject homePage;
     private RegistrationFirstPageObject registrationFirstPageObject;
 
     @Before
-    public void setUp() {
-        super.setup(); // Call the setup method from BaseTest
-        homePage = new HomePageObject(driver);
-        registrationFirstPageObject = new RegistrationFirstPageObject(driver);
-        homePage.clickOnPrivacyPolicy();
+    public void setup () {
+        super.setup();
+    }
+
+    @After
+    public void tearDown () {
+        super.tearDown();
     }
 
 
-    @Given("I click on Registration Button")
-    public void iClickOnRegistrationButton () {
-        homePage.clickOnRegistrationButton();
+    @Given("Open Tesco website")
+    public void openHomePage () {
+        driver.get(baseURL);
     }
 
-    @And("click on next")
-    public void clickOnNext () {
-        registrationFirstPageObject.clickOnNext();
-    }
-
-    @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
-    public void fillAllUserInformationWhitNoParams() throws Exception{
-        String randomEmail= registrationFirstPageObject.generateRandomEmail();
-        String password = registrationFirstPageObject.generatePassword();
-        String passwordConfirm = password;
-
-        if (registrationFirstPageObject.isEmailValid(randomEmail)) {
-            try {
-                registrationFirstPageObject.fillOutRegistrationForm(randomEmail, password, passwordConfirm);
-            } catch (Exception e) {
-                throw new Exception(e);
-            }
-        } else {
-            throw new IllegalArgumentException("Invalid email format: " + randomEmail);
-        }
-
+    @Given("Accept privacy policy")
+    public void acceptPolicy () {
+        homePage.acceptPolicy();
 
     }
+
+    @Given("navigate to Registration Page")
+    public void navigateToRegistrationPage () {
+        registrationFirstPageObject = homePage.navigateToRegistration();
+
+    }
+
+
+@And("click on next")
+public void clickOnNext () {
+    registrationFirstPageObject.clickOnNext();
+}
+
+@When("Register with User Information <email> and <password> and <passwordConfirm>")
+public void registration(){
+    String randomEmail = registrationFirstPageObject.generateRandomEmail();
+    String password = registrationFirstPageObject.generatePassword();
+    String passwordConfirm = password;
+
+            registrationFirstPageObject.registrationWithRandom();
+
+
+}
 
   /*  @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
     public void fillAllUserInformation (String email, String password, String passwordConfirm) throws Exception {
@@ -67,20 +72,24 @@ public class RegistrationFirst extends BaseTest {
     }*/
 
 
-    @When("I fill out the Registration Page with user Information <email> and <password>")
-    public void fillOutEmailPW () {
+@When("I fill out the Registration Page with user Information <email> and <password>")
+public void fillOutEmailPW () throws Exception {
+
+    String randomEmail = registrationFirstPageObject.generateRandomEmail();
+    String password = registrationFirstPageObject.generatePassword();
+
+    registrationFirstPageObject.fillOutRegistrationForm(randomEmail, password, password);
+}
 
 
-    }
+@Then("<ErrorMessage> appears")
+public void errorMessageAppears () {
+}
 
-    @Then("<ErrorMessage> appears")
-    public void errorMessageAppears () {
-    }
+@When("I fill out the Registration Page with user Information <email>")
+public void fillOutEmailOnly () throws Exception {
+    String randomEmail = registrationFirstPageObject.generateRandomEmail();
 
-    @When("I fill out the Registration Page with user Information <email>")
-    public void fillOutEmailOnly () {
-    }
-
-
-
+    registrationFirstPageObject.fillOutRegistrationForm(randomEmail, "", "");
+}
 }

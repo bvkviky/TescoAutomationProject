@@ -36,7 +36,7 @@ public class RegistrationFirstPageObject {
         nextButton.click();
     }
 
-    public String generatePassword() {
+    public String generatePassword () {
         String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
@@ -68,7 +68,7 @@ public class RegistrationFirstPageObject {
         String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder email = new StringBuilder();
         Random random = new Random();
-        for (int i = 10; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             email.append(characters.charAt(random.nextInt(characters.length())));
 
         }
@@ -78,24 +78,27 @@ public class RegistrationFirstPageObject {
         return email.toString();
     }
 
-    public boolean isEmailValid(String email){
+   /* public boolean isEmailValid(String email){
         String regex= "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return  matcher.matches();
+    }*/
+
+
+    public void registration (String email, String password, String passwordConfirm) {
+
+
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+        passwordConfirmInput.sendKeys(passwordConfirm);
     }
 
-
-    public void fillOutRegistrationForm (String email, String password, String passwordConfirm) throws Exception {
-        if (isEmailValid(email)) {
-            emailInput.sendKeys(email);
-            passwordInput.sendKeys(password);
-            passwordConfirmInput.sendKeys(passwordConfirm);
-        }else {
-            throw new Exception("Invalid email format" + email );
-        }
+    public void registrationWithRandom () {
+        registration(generateRandomEmail(), generatePassword(), generatePassword());
 
     }
-
 }
+
+
 
