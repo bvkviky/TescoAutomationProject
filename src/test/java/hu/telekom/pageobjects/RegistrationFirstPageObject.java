@@ -1,14 +1,11 @@
 package hu.telekom.pageobjects;
 
-import hu.telekom.tests.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegistrationFirstPageObject {
     WebDriver driver;
@@ -94,10 +91,24 @@ public class RegistrationFirstPageObject {
         passwordConfirmInput.sendKeys(passwordConfirm);
     }
 
-    public void registrationWithRandom () {
+    public void registrationWithRandom (){
         registration(generateRandomEmail(), generatePassword(), generatePassword());
 
     }
+
+    public UserExistsPageObject navigateUserExistPage () {
+        return new UserExistsPageObject(driver);
+
+    }
+
+   /* public UserExistsPageObject navigateUserExistPage() {
+        UserExistsPageObject userExistsPage = new UserExistsPageObject(driver);
+        userExistsPage.navigateUserExistPage();
+        return userExistsPage;
+    }*/
+
+
+
 }
 
 

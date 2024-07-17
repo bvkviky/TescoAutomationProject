@@ -2,6 +2,7 @@ package hu.telekom.cucumber.steps;
 
 import hu.telekom.pageobjects.HomePageObject;
 import hu.telekom.pageobjects.RegistrationFirstPageObject;
+import hu.telekom.pageobjects.UserExistsPageObject;
 import hu.telekom.tests.BaseTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -16,9 +17,11 @@ public class RegistrationFirst extends BaseTest {
     private HomePageObject homePage;
     private RegistrationFirstPageObject registrationFirstPageObject;
 
+
     @Before
     public void setup () {
         super.setup();
+        homePage = new HomePageObject(driver);
     }
 
     @After
@@ -27,7 +30,9 @@ public class RegistrationFirst extends BaseTest {
     }
 
 
-    @Given("Open Tesco website")
+
+
+    @Given("Open TESCO website")
     public void openHomePage () {
         driver.get(baseURL);
     }
@@ -35,7 +40,6 @@ public class RegistrationFirst extends BaseTest {
     @Given("Accept privacy policy")
     public void acceptPolicy () {
         homePage.acceptPolicy();
-
     }
 
     @Given("navigate to Registration Page")
@@ -44,22 +48,29 @@ public class RegistrationFirst extends BaseTest {
 
     }
 
+    @And("click on next")
+    public void clickOnNext () {
+        registrationFirstPageObject.clickOnNext();
+    }
 
-@And("click on next")
-public void clickOnNext () {
-    registrationFirstPageObject.clickOnNext();
-}
-
-@When("Register with User Information <email> and <password> and <passwordConfirm>")
-public void registration(){
-    String randomEmail = registrationFirstPageObject.generateRandomEmail();
-    String password = registrationFirstPageObject.generatePassword();
-    String passwordConfirm = password;
-
-            registrationFirstPageObject.registrationWithRandom();
+    @When("Register with User Information <email> and <password> and <passwordConfirm>")
+    public void registration () {
+        registrationFirstPageObject.registrationWithRandom();
 
 
-}
+    }
+    @Then("<ErrorMessage> appears")
+    public void errorMessageAppears () {
+    }
+
+    @When("register with {string} and {string}")
+    public void registerWithTestData(String email, String password, String passwordConfirm) {
+        registrationFirstPageObject.registration(email, password, passwordConfirm);
+
+
+    }
+
+
 
   /*  @When("I fill out the Registration Page with user Information <email> and <password> and <passwordConfirm>")
     public void fillAllUserInformation (String email, String password, String passwordConfirm) throws Exception {
@@ -72,24 +83,21 @@ public void registration(){
     }*/
 
 
-@When("I fill out the Registration Page with user Information <email> and <password>")
-public void fillOutEmailPW () throws Exception {
+   /* @When("I fill out the Registration Page with user Information <email> and <password>")
+    public void fillOutEmailPW () throws Exception {
 
-    String randomEmail = registrationFirstPageObject.generateRandomEmail();
-    String password = registrationFirstPageObject.generatePassword();
+        String randomEmail = registrationFirstPageObject.generateRandomEmail();
+        String password = registrationFirstPageObject.generatePassword();
 
-    registrationFirstPageObject.fillOutRegistrationForm(randomEmail, password, password);
-}
+        registrationFirstPageObject.registration(randomEmail, password, password);
+    }*/
 
 
-@Then("<ErrorMessage> appears")
-public void errorMessageAppears () {
-}
 
-@When("I fill out the Registration Page with user Information <email>")
-public void fillOutEmailOnly () throws Exception {
-    String randomEmail = registrationFirstPageObject.generateRandomEmail();
+   /* @When("I fill out the Registration Page with user Information <email>")
+    public void fillOutEmailOnly () throws Exception {
+        String randomEmail = registrationFirstPageObject.generateRandomEmail();
 
-    registrationFirstPageObject.fillOutRegistrationForm(randomEmail, "", "");
-}
+        registrationFirstPageObject.fillOutRegistrationForm(randomEmail, "", "");
+    }*/
 }

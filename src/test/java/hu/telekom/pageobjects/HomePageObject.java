@@ -32,9 +32,8 @@ public class HomePageObject {
         privacyPolicyElement.click();
     }
 
-    public RegistrationFirstPageObject navigateToRegistration() {
+    public RegistrationFirstPageObject  navigateToRegistration() {
         registrationButtonElement.click();
-
-        return null;
+        return new RegistrationFirstPageObject(driver);
     }
 }

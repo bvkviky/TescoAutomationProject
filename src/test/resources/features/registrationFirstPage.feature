@@ -3,7 +3,7 @@ Feature: Registration
   Rule: Registration Page is available
 
     Background:
-      Given Open Tesco website
+      Given Open TESCO website
       And Accept privacy policy
 
     Scenario : Create new User FirstStep
@@ -12,14 +12,10 @@ Feature: Registration
       And click on next
       Then Registration SecondPage will open
 
-
-
     Scenario: User already exists
       Given navigate to Registration Page
       When register with "test@test.com" and "Password123"
       Then New Page opens with User exists Message "Ezt az email címet már regisztráltuk"
-
-
 # _____________________________________________________________________________________________________________
 
     Scenario Outline: Wrong Password credentials
