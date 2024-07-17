@@ -64,11 +64,14 @@ public class RegistrationFirst extends BaseTest {
     }
 
     @When("register with {string} and {string}")
-    public void registerWithTestData(String email, String password, String passwordConfirm) {
-        registrationFirstPageObject.registration(email, password, passwordConfirm);
+    public void registerWithTestData(String email, String password) {
+        registrationFirstPageObject.registration(email,password);
+        registrationFirstPageObject.registration(email, password);
 
 
     }
+
+
 
 
 

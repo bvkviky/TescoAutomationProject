@@ -28,6 +28,16 @@ public class RegistrationFirstPageObject {
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(xpath = "//li[text()='A jelszónak tartalmaznia kell legalább egy számot.']")
+    WebElement atLeastOneNumberError;
+
+    @FindBy(xpath = "//li[text()='A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.']")
+    WebElement atLeastOneNumberAndCharacterError;
+
+
+
+
+
     //Methods
     public void clickOnNext () {
         nextButton.click();
@@ -83,16 +93,16 @@ public class RegistrationFirstPageObject {
     }*/
 
 
-    public void registration (String email, String password, String passwordConfirm) {
+    public void registration (String email, String password) {
 
 
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
-        passwordConfirmInput.sendKeys(passwordConfirm);
+        passwordConfirmInput.sendKeys(password);
     }
 
     public void registrationWithRandom (){
-        registration(generateRandomEmail(), generatePassword(), generatePassword());
+        registration(generateRandomEmail(), generatePassword());
 
     }
 
