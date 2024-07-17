@@ -8,25 +8,37 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class RegFirstPageExeptions extends BaseTest {
-   
+
+
+    private HomePageObject homePage;
     private RegistrationFirstPageObject registrationFirstPageObject;
     private String actualErrorMessage;
 
-    public  RegistrationFirstPageObject getRegistrationFirstPageObject () {
-        return registrationFirstPageObject;
+
+
+    public RegFirstPageExeptions(){
+        this.registrationFirstPageObject= new RegistrationFirstPageObject(driver);
     }
 
 
 
     @When("register with user Information <email> and <password>")
     public void registerWithUserInformationEmailAndPassword (String email, String password) {
+        registrationFirstPageObject.registration(email, password);
+        actualErrorMessage = registrationFirstPageObject.getErrorMessage();
+
 
     }
 
     @Then("<ErrorMessage> appears")
-    public void errormessageAppears () {
+    public void errorMessages (String expectedMessage) {
+        assertEquals(expectedMessage, actualErrorMessage);
 
     }
+
+
 
 }

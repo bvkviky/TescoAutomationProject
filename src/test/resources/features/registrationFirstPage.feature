@@ -23,6 +23,7 @@ Feature: Registration
       Then <ErrorMessage> appears
 
       Examples:
-        | email        | password     | ErrorMessage                                                                                                 |
-        | test@test.de | asdfghasdfgh | A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot. |
-        | test@test.de | asdfgh1      | A jelszónak tartalmaznia kell legalább egy számot.                                                           |
+        | email        | password  | ErrorMessage                                                                                                 |
+        | test@test.de | asdfgha   | A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot. |
+        | test@test.de | asdfghjk  | A jelszónak tartalmaznia kell legalább egy számot.                                                           |
+        | test@test.de | 012345678 | A jelszónak legalább 1 betűt tartalmaznia kell!                                                              |

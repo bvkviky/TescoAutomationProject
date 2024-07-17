@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class RegistrationFirstPageObject {
     WebDriver driver;
+    private String errorMessage;
 
     //UI Elements
     @FindBy(xpath = "//button[@class='button button-primary']")
@@ -33,9 +34,6 @@ public class RegistrationFirstPageObject {
 
     @FindBy(xpath = "//li[text()='A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.']")
     WebElement atLeastOneNumberAndCharacterError;
-
-
-
 
 
     //Methods
@@ -94,30 +92,37 @@ public class RegistrationFirstPageObject {
 
 
     public void registration (String email, String password) {
-
-
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         passwordConfirmInput.sendKeys(password);
+
+        if (password.length() < 8) {
+            errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.";
+
+        } else if (!password.matches(".*\\d.*")) {
+            errorMessage = "A jelszónak tartalmaznia kell legalább egy számot.";
+        } else if (!password.matches(".*[a-zA-Z].*")) {
+        } else {
+            errorMessage = "";
+
+        }
     }
 
-    public void registrationWithRandom (){
+
+    public void registrationWithRandom () {
         registration(generateRandomEmail(), generatePassword());
 
     }
 
-    public UserExistsPageObject navigateUserExistPage () {
-        return new UserExistsPageObject(driver);
+    public void navigateUserExistPage () {
+        new UserExistsPageObject(driver);
 
     }
 
-   /* public UserExistsPageObject navigateUserExistPage() {
-        UserExistsPageObject userExistsPage = new UserExistsPageObject(driver);
-        userExistsPage.navigateUserExistPage();
-        return userExistsPage;
-    }*/
 
-
+    public String getErrorMessage () {
+        return errorMessage;
+    }
 
 }
 

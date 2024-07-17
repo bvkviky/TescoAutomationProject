@@ -6,6 +6,7 @@ import hu.telekom.pageobjects.RegistrationFirstPageObject;
 import hu.telekom.pageobjects.UserExistsPageObject;
 import hu.telekom.tests.BaseTest;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 
@@ -19,6 +20,11 @@ public class UserExists extends BaseTest {
     public void setup () {
         super.setup();
         registrationFirstPageObject = new RegistrationFirstPageObject(driver);
+    }
+
+    @After
+    public void tearDown () {
+        super.tearDown();
     }
 
 

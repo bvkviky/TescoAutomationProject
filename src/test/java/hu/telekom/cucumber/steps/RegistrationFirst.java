@@ -30,8 +30,6 @@ public class RegistrationFirst extends BaseTest {
     }
 
 
-
-
     @Given("Open TESCO website")
     public void openHomePage () {
         driver.get(baseURL);
@@ -59,18 +57,12 @@ public class RegistrationFirst extends BaseTest {
 
 
     }
-    @Then("<ErrorMessage> appears")
-    public void errorMessageAppears () {
-    }
+
 
     @When("register with {string} and {string}")
-    public void registerWithTestData(String email, String password) {
-        registrationFirstPageObject.registration(email,password);
+    public void registerWithTestData (String email, String password) {
         registrationFirstPageObject.registration(email, password);
-
-
-    }
-
+        registrationFirstPageObject.registration(email, password);
 
 
 
@@ -103,4 +95,5 @@ public class RegistrationFirst extends BaseTest {
 
         registrationFirstPageObject.fillOutRegistrationForm(randomEmail, "", "");
     }*/
+    }
 }
