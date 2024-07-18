@@ -56,20 +56,12 @@ public class RegistrationSteps extends BaseTest {
         registrationFirstPageObject.clickOnNext();
     }
 
-    @When("Register with User Information <email> and <password> and <passwordConfirm>")
-    public void registration () {
-        registrationFirstPageObject.registrationWithRandom();
-
-
-    }
 
 
     @When("register with {string} and {string}")
     public void registerWithTestData (String email, String password) {
 
-        userExistsPageObject = registrationFirstPageObject.registration(email, password);
-
-
+        userExistsPageObject = registrationFirstPageObject.registrationWithExisting(email, password);
     }
 
     @Then("New Page opens with User exists Message {string}")
@@ -86,8 +78,12 @@ public class RegistrationSteps extends BaseTest {
 
     @Then("Registration SecondPage will open")
     public void registrationSecondSteps () {
-       registrationFirstPageObject =  regSecondPageObject.navigatoToSecondStep();
+        regSecondPageObject.checkSecondPage();
 
     }
 
+    @When("Register with Generated Data")
+    public void registerWithGeneratedData () {
+        regSecondPageObject = registrationFirstPageObject.registration();
+    }
 }

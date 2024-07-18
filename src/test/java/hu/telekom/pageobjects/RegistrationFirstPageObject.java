@@ -90,7 +90,7 @@ public class RegistrationFirstPageObject extends BasePage {
     }
 
 
-    public UserExistsPageObject registration (String email, String password) {
+    public UserExistsPageObject registrationWithExisting (String email, String password) {
 
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
@@ -100,9 +100,13 @@ public class RegistrationFirstPageObject extends BasePage {
 
     }
 
-
-    public void registrationWithRandom () {
-        registration(generateRandomEmail(), generatePassword());
+    public RegSecondPageObject registration () {
+        String password = generatePassword();
+        emailInput.sendKeys(generateRandomEmail());
+        passwordInput.sendKeys(password);
+        passwordConfirmInput.sendKeys(password);
+        nextButton.click();
+        return new RegSecondPageObject(driver);
 
     }
 
@@ -120,12 +124,6 @@ public class RegistrationFirstPageObject extends BasePage {
             throw new AssertionError("Valami nem jó...");
         }
     }
-
-    public RegSecondPageObject navigateToSecondStep () {
-        nextButton.click();
-        return new RegSecondPageObject(driver);
-    }
 }
-
 
 

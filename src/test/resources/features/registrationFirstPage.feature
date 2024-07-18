@@ -8,8 +8,7 @@ Feature: Registration
 
     Scenario: Create new User FirstStep
       Given navigate to Registration Page
-      When Register with User Information <email> and <password> and <passwordConfirm>
-      And click on next
+      When Register with Generated Data
       Then Registration SecondPage will open
 
     Scenario: User already exists

@@ -16,12 +16,9 @@ public class RegSecondPageObject extends BasePage {
         super(driver);
     }
 
-    public RegistrationFirstPageObject navigatoToSecondStep () {
+    public void checkSecondPage () {
 
         secondStepFinder.isDisplayed();
-        return new RegistrationFirstPageObject(driver);
 
     }
-
-
 }
