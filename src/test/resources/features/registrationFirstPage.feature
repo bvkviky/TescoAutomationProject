@@ -19,8 +19,8 @@ Feature: Registration
 
     Scenario Outline: Wrong Password credentials
       Given navigate to Registration Page
-      When register with user Information <email> and <password>
-      Then <ErrorMessage> appears
+      When register with user Information "<email>" and "<password>"
+      Then "<ErrorMessage>" appears
 
       Examples:
         | email        | password  | ErrorMessage                                                                                                 |

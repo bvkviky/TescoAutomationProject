@@ -25,7 +25,7 @@ public class RegFirstPageExeptions extends BaseTest {
 
 
 
-    @When("register with user Information <email> and <password>")
+    @When("register with user Information {string} and {string}")
     public void registerWithUserInformationEmailAndPassword (String email, String password) {
         registrationFirstPageObject.registration(email, password);
         actualErrorMessage = registrationFirstPageObject.getErrorMessage();
@@ -33,7 +33,7 @@ public class RegFirstPageExeptions extends BaseTest {
 
     }
 
-    @Then("<ErrorMessage> appears")
+    @Then("{string} appears")
     public void errorMessages (String expectedMessage) {
         assertEquals(expectedMessage, actualErrorMessage);
 

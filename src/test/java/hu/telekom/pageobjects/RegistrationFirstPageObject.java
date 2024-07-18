@@ -4,12 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Random;
 
 public class RegistrationFirstPageObject {
     WebDriver driver;
     private String errorMessage;
+    private WebDriverWait wait;
+
+
 
     //UI Elements
     @FindBy(xpath = "//button[@class='button button-primary']")
@@ -27,6 +32,7 @@ public class RegistrationFirstPageObject {
     public RegistrationFirstPageObject (WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @FindBy(xpath = "//li[text()='A jelszónak tartalmaznia kell legalább egy számot.']")
