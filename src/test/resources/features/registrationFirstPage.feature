@@ -15,14 +15,15 @@ Feature: Registration
     Scenario: User already exists
       Given  navigate to Registration Page
       When register with "test@test.com" and "Password123"
-      Then New Page opens with User exists Message "Ezt az email címet már regisztráltuk"
+      Then New Page opens with User exists Message "Ezt az email címet már regisztráltuk!"
 
     Scenario Outline: Wrong Password credentials
       Given navigate to Registration Page
-      When register with user Information <email> and <password>
-      Then <ErrorMessage> appears
+      When register with "<email>" and "<password>"
+      Then "<ErrorMessage>" appears
 
       Examples:
-        | email        | password     | ErrorMessage                                                                                                 |
-        | test@test.de | asdfghasdfgh | A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot. |
-        | test@test.de | asdfgh1      | A jelszónak tartalmaznia kell legalább egy számot.                                                           |
+        | email        | password  | ErrorMessage                                                                                                 |
+        | test@test.de | asdfgha   | A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot. |
+        | test@test.de | asdfghjk  | A jelszónak tartalmaznia kell legalább egy számot.                                                           |
+        | test@test.de | 012345678 | A jelszónak legalább 1 betűt tartalmaznia kell!                                                              |

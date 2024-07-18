@@ -1,33 +1,27 @@
 package hu.telekom.pageobjects;
 
-import org.junit.jupiter.api.Assertions;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserExistsPageObject {
-    WebDriver driver;
+public class UserExistsPageObject extends BasePage {
 
 
-//UI
-
-    @FindBy(xpath = "//h1[text()='Ezt az email címet már regisztráltuk!']")
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[1]/h1")
     WebElement userExistLine;
 
 
-    public UserExistsPageObject (WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public UserExistsPageObject (WebDriver driver){
+        super(driver);
     }
 
 
-    //Methods
-    public void  verifyUserExistPage (){
-
-        assertEquals("Ezt az email címet már regisztráltuk!", userExistLine.getText());
+    public void verifyUserExistPage (String message) {
+        assertEquals(userExistLine.getText(), message);
 
     }
+
 }

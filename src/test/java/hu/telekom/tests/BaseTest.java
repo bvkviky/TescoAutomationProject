@@ -6,7 +6,7 @@ import hu.telekom.browser.WebBrowserType;
 import hu.telekom.pageobjects.HomePageObject;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
+
 
 import java.time.Duration;
 
@@ -14,9 +14,9 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected String baseURL;
+    protected String  baseURL = "https://bevasarlas.tesco.hu/groceries/hu-HU";
     protected WebBrowserType webBrowserType;
-    protected HomePageObject homePageObject;
+
 
     @BeforeAll
     public void setup () {

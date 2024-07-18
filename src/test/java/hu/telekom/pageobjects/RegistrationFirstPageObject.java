@@ -3,18 +3,26 @@ package hu.telekom.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.Random;
 
-public class RegistrationFirstPageObject {
-    WebDriver driver;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class RegistrationFirstPageObject extends BasePage {
+
+    public RegistrationFirstPageObject (WebDriver driver) {
+        super(driver);
+        isLoaded(emailInput);
+        isLoaded(emailInput);
+
+
+    }
 
     //UI Elements
     @FindBy(xpath = "//button[@class='button button-primary']")
     WebElement nextButton;
 
-    @FindBy(xpath = "//input[@id='email']")
+    @FindBy(xpath = "//*[@id=\"email\"]")
     WebElement emailInput;
 
     @FindBy(xpath = "//input[@id='password']")
@@ -23,19 +31,15 @@ public class RegistrationFirstPageObject {
     @FindBy(xpath = "//input[@id='confirm-password']")
     WebElement passwordConfirmInput;
 
-    public RegistrationFirstPageObject (WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
 
-    @FindBy(xpath = "//li[text()='A jelszónak tartalmaznia kell legalább egy számot.']")
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li")
     WebElement atLeastOneNumberError;
 
-    @FindBy(xpath = "//li[text()='A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.']")
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li[1]")
     WebElement atLeastOneNumberAndCharacterError;
 
-
-
+    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li")
+    WebElement atLeastOneCharacter;
 
 
     //Methods
@@ -85,40 +89,42 @@ public class RegistrationFirstPageObject {
         return email.toString();
     }
 
-   /* public boolean isEmailValid(String email){
-        String regex= "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        return  matcher.matches();
-    }*/
 
-
-    public void registration (String email, String password) {
-
+    public UserExistsPageObject registration (String email, String password) {
 
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         passwordConfirmInput.sendKeys(password);
-    }
-
-    public void registrationWithRandom (){
-        registration(generateRandomEmail(), generatePassword());
-
-    }
-
-    public UserExistsPageObject navigateUserExistPage () {
+        nextButton.click();
         return new UserExistsPageObject(driver);
 
     }
 
-   /* public UserExistsPageObject navigateUserExistPage() {
-        UserExistsPageObject userExistsPage = new UserExistsPageObject(driver);
-        userExistsPage.navigateUserExistPage();
-        return userExistsPage;
-    }*/
+
+    public void registrationWithRandom () {
+        registration(generateRandomEmail(), generatePassword());
+
+    }
 
 
+    public void validateErrorMessage (String expectedErrorMessage) {
 
+
+        if (atLeastOneNumberError.isDisplayed()) {
+            assertEquals(expectedErrorMessage, atLeastOneNumberError.getText());
+        } else if (atLeastOneCharacter.isDisplayed()) {
+            assertEquals(expectedErrorMessage, atLeastOneCharacter.getText());
+        } else if (atLeastOneNumberAndCharacterError.isDisplayed()) {
+            assertEquals(expectedErrorMessage, atLeastOneNumberAndCharacterError.getText());
+        } else {
+            throw new AssertionError("Valami nem jó...");
+        }
+    }
+
+    public RegSecondPageObject navigateToSecondStep () {
+        nextButton.click();
+        return new RegSecondPageObject(driver);
+    }
 }
 
 
