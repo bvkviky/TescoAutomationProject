@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -43,7 +44,7 @@ public class RegistrationFirstPageObject {
 
 
     //Methods
-    public void clickOnNext () {
+    public void nextButton () {
         nextButton.click();
     }
 
@@ -98,9 +99,12 @@ public class RegistrationFirstPageObject {
 
 
     public void registration (String email, String password) {
+
+
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         passwordConfirmInput.sendKeys(password);
+
 
         if (password.length() < 8) {
             errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.";
@@ -110,6 +114,9 @@ public class RegistrationFirstPageObject {
         } else if (!password.matches(".*[a-zA-Z].*")) {
         } else {
             errorMessage = "";
+            WebElement nextB = wait.until(ExpectedConditions.elementToBeClickable(nextButton));
+            nextB.click();
+
 
         }
     }

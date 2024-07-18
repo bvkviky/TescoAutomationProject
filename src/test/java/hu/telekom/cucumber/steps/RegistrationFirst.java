@@ -2,13 +2,11 @@ package hu.telekom.cucumber.steps;
 
 import hu.telekom.pageobjects.HomePageObject;
 import hu.telekom.pageobjects.RegistrationFirstPageObject;
-import hu.telekom.pageobjects.UserExistsPageObject;
 import hu.telekom.tests.BaseTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class RegistrationFirst extends BaseTest {
@@ -48,7 +46,7 @@ public class RegistrationFirst extends BaseTest {
 
     @And("click on next")
     public void clickOnNext () {
-        registrationFirstPageObject.clickOnNext();
+        registrationFirstPageObject.nextButton();
     }
 
     @When("Register with User Information <email> and <password> and <passwordConfirm>")
