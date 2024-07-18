@@ -3,21 +3,17 @@ package hu.telekom.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.Random;
 
-public class RegistrationFirstPageObject {
-    WebDriver driver;
-    private String errorMessage;
-    private WebDriverWait wait;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class RegistrationFirstPageObject extends BasePage {
 
 
+    public static final String AT_LEAST_ONE_NUMBER = "A jelszónak tartalmaznia kell legalább egy számot.";
+    public static final String AT_LEAST_NUMBER_AND_CHARAKTER = "A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.";
 
-    //UI Elements
     @FindBy(xpath = "//button[@class='button button-primary']")
     WebElement nextButton;
 
@@ -30,12 +26,6 @@ public class RegistrationFirstPageObject {
     @FindBy(xpath = "//input[@id='confirm-password']")
     WebElement passwordConfirmInput;
 
-    public RegistrationFirstPageObject (WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
     @FindBy(xpath = "//li[text()='A jelszónak tartalmaznia kell legalább egy számot.']")
     WebElement atLeastOneNumberError;
 
@@ -43,7 +33,11 @@ public class RegistrationFirstPageObject {
     WebElement atLeastOneNumberAndCharacterError;
 
 
-    //Methods
+    public RegistrationFirstPageObject (WebDriver driver) {
+        super(driver);
+
+    }
+
     public void nextButton () {
         nextButton.click();
     }
@@ -90,53 +84,34 @@ public class RegistrationFirstPageObject {
         return email.toString();
     }
 
-   /* public boolean isEmailValid(String email){
-        String regex= "^[A-Za-z0-9+_.-]+@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        return  matcher.matches();
-    }*/
-
 
     public void registration (String email, String password) {
-
 
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         passwordConfirmInput.sendKeys(password);
 
-
-        if (password.length() < 8) {
-            errorMessage = "A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell legalább egy betűt és egy számot.";
-
-        } else if (!password.matches(".*\\d.*")) {
-            errorMessage = "A jelszónak tartalmaznia kell legalább egy számot.";
-        } else if (!password.matches(".*[a-zA-Z].*")) {
-        } else {
-            errorMessage = "";
-            WebElement nextB = wait.until(ExpectedConditions.elementToBeClickable(nextButton));
-            nextB.click();
+    }
 
 
+  /*  public String getErrorMessage () {
+        if (atLeastOneNumberError.isDisplayed()) {
+            return atLeastOneNumberError.getText();
+        } else if (atLeastOneNumberAndCharacterError.isDisplayed()) {
+            return atLeastOneNumberAndCharacterError.getText();
+        }
+        return "UndefinedError";
+    }*/
+
+
+    public void validateErrorMessage () {
+
+        if (atLeastOneNumberError.isDisplayed()) {
+            assertEquals(AT_LEAST_ONE_NUMBER, atLeastOneNumberError.getText());
+        } else if (atLeastOneNumberAndCharacterError.isDisplayed()) {
+            assertEquals(AT_LEAST_NUMBER_AND_CHARAKTER, atLeastOneNumberAndCharacterError.getText());
         }
     }
-
-
-    public void registrationWithRandom () {
-        registration(generateRandomEmail(), generatePassword());
-
-    }
-
-    public void navigateUserExistPage () {
-        new UserExistsPageObject(driver);
-
-    }
-
-
-    public String getErrorMessage () {
-        return errorMessage;
-    }
-
 }
 
 

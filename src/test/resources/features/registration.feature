@@ -14,12 +14,12 @@ Feature: Registration
 
     Scenario: User already exists
       Given  navigate to Registration Page
-      When register with "test@test.com" and "Password123"
+      When register with User Information "test@test.com" and "Password123"
       Then New Page opens with User exists Message "Ezt az email címet már regisztráltuk"
 
     Scenario Outline: Wrong Password credentials
       Given navigate to Registration Page
-      When register with user Information "<email>" and "<password>"
+      When register with User Information "<email>" and "<password>"
       Then "<ErrorMessage>" appears
 
       Examples:

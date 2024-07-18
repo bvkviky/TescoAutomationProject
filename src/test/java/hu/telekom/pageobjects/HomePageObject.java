@@ -3,15 +3,11 @@ package hu.telekom.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class HomePageObject {
+
+public class HomePageObject extends BasePage{
     WebDriver driver;
 
-
-
-
-    //UI Elements
     @FindBy(xpath = "//button[@class='styled__StyledTextButton-sc-8hxn3m-0 jyQVJq ddsweb-cookies-notification__button ddsweb-button ddsweb-button--text-button' and span='Minden Cookie elfogadása']")
     WebElement privacyPolicyElement;
 
@@ -19,15 +15,11 @@ public class HomePageObject {
     WebElement registrationButtonElement;
 
 
-
-
     public HomePageObject (WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+      super(driver);
     }
 
 
-    //Methods
     public void acceptPolicy () {
         privacyPolicyElement.click();
     }

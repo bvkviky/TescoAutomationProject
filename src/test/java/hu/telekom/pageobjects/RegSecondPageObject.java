@@ -8,23 +8,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegSecondPageObject {
-
-    WebDriver driver;
+public class RegSecondPageObject extends BasePage {
 
 
-
-    //UI Elements
     @FindBy(xpath = "//div[@class='progress-bar__stage-number' and text()='2']")
     WebElement secondStepFinder;
 
 
-    public RegSecondPageObject (WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public RegSecondPageObject (WebDriver driver){
+        super(driver);
     }
 
-    //Methods
+
     @Then("Registration SecondPage will open")
     public void registrationSecondPageWillOpen () {
         secondStepFinder.isDisplayed();
