@@ -1,0 +1,13 @@
+@objects
+    logo            css     .brand-header__logo
+    searchf_ield     id       search-input
+
+
+= Header =
+    logo:
+        width ~300 px
+        height 80px
+
+
+
+
