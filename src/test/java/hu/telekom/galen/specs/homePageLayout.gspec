@@ -1,13 +1,23 @@
 @objects
     logo            css     .brand-header__logo
-    searchf_ield     id       search-input
+    menubar         css     .menubar
+        registration_item   id      utility-header-registration-link
+        login_item          xpath   //*[@id="utility-header-registration-link"]
+        language_item       id      utility-header-language-switch-link
+        help_item           id      utility-header-help-link
+
+    search_field    id      search-input
+
 
 
 = Header =
     logo:
-        width ~300 px
-        height 80px
+        width 120 px
+        height ~30px
 
-
-
+    menubar:
+         contains partly registration_item
+         contains partly login_item
+         contains partly language_item
+         contains partly help_item
 
