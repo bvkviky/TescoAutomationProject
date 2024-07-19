@@ -1,42 +1,35 @@
-/*package hu.telekom.pageobjects;
+package hu.telekom.selenidetest.pages;
 
+import com.codeborne.selenide.SelenideElement;
+import hu.telekom.pageobjects.BasePage;
+import hu.telekom.pageobjects.RegSecondPageObject;
+import hu.telekom.pageobjects.UserExistsPageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import java.util.Random;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegistrationFirstPageObject extends BasePage {
+public class RegistrationFP extends BasePage {
+    private SelenideElement nextButton = $x("//button[@class='button button-primary']");
+    private SelenideElement emailInput = $("#email");
+    private SelenideElement passwordInput = $("#password");
+    private SelenideElement passwordConfirmInput = $("#confirm-password");
+    private SelenideElement atLeastOneNumberError = $x("//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li");
+    private SelenideElement atLeastOneNumberAndCharacterError = $x("//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li[1]");
+    private SelenideElement atLeastOneCharacter = $x("//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li");
 
-    public RegistrationFirstPageObject (WebDriver driver) {
+    public RegistrationFP (WebDriver driver) {
         super(driver);
-        isLoaded(emailInput);
     }
 
-    @FindBy(xpath = "//button[@class='button button-primary']")
-    WebElement nextButton;
-    @FindBy(xpath = "//*[@id=\"email\"]")
-    WebElement emailInput;
-    @FindBy(xpath = "//input[@id='password']")
-    WebElement passwordInput;
-    @FindBy(xpath = "//input[@id='confirm-password']")
-    WebElement passwordConfirmInput;
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li")
-    WebElement atLeastOneNumberError;
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li[1]")
-    WebElement atLeastOneNumberAndCharacterError;
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li")
-    WebElement atLeastOneCharacter;
-
-
-
-    public void clickOnNext () {
+    public void clickOnNext() {
         nextButton.click();
     }
 
-    public String generatePassword () {
+    public String generatePassword() {
         String upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
@@ -61,16 +54,14 @@ public class RegistrationFirstPageObject extends BasePage {
         }
 
         return new String(passwordArray);
-
     }
 
-    public String generateRandomEmail () {
+    public String generateRandomEmail() {
         String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder email = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             email.append(characters.charAt(random.nextInt(characters.length())));
-
         }
         String[] domains = {"example.com", "test.com", "demo.com"};
         email.append("@").append(domains[random.nextInt(domains.length)]);
@@ -78,30 +69,24 @@ public class RegistrationFirstPageObject extends BasePage {
         return email.toString();
     }
 
-
-    public UserExistsPageObject registrationWithExisting (String email, String password) {
-
-        emailInput.sendKeys(email);
-        passwordInput.sendKeys(password);
-        passwordConfirmInput.sendKeys(password);
-        nextButton.click();
-        return new UserExistsPageObject(driver);
-
+    public UserExistsPageObject registrationWithExisting(String email, String password) {
+        emailInput.setValue(email);
+        passwordInput.setValue(password);
+        passwordConfirmInput.setValue(password);
+        clickOnNext();
+        return new UserExistsPageObject();
     }
 
-    public RegSecondPageObject registration () {
+    public RegSecondPageObject registration() {
         String password = generatePassword();
-        emailInput.sendKeys(generateRandomEmail());
-        passwordInput.sendKeys(password);
-        passwordConfirmInput.sendKeys(password);
-        nextButton.click();
-        return new RegSecondPageObject(driver);
-
+        emailInput.setValue(generateRandomEmail());
+        passwordInput.setValue(password);
+        passwordConfirmInput.setValue(password);
+        clickOnNext();
+        return new RegSecondPageObject();
     }
 
-    public void validateErrorMessage (String expectedErrorMessage) {
-
-
+    public void validateErrorMessage(String expectedErrorMessage) {
         if (atLeastOneNumberError.isDisplayed()) {
             assertEquals(expectedErrorMessage, atLeastOneNumberError.getText());
         } else if (atLeastOneCharacter.isDisplayed()) {
@@ -115,4 +100,3 @@ public class RegistrationFirstPageObject extends BasePage {
 }
 
 
-*/

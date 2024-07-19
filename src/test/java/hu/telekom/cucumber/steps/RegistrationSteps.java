@@ -2,8 +2,9 @@ package hu.telekom.cucumber.steps;
 
 import hu.telekom.pageobjects.HomePageObject;
 import hu.telekom.pageobjects.RegSecondPageObject;
-import hu.telekom.pageobjects.RegistrationFirstPageObject;
+//import hu.telekom.pageobjects.RegistrationFirstPageObject;
 import hu.telekom.pageobjects.UserExistsPageObject;
+import hu.telekom.selenidetest.pages.RegistrationFP;
 import hu.telekom.tests.BaseTest;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -16,9 +17,10 @@ public class RegistrationSteps extends BaseTest {
 
 
     private HomePageObject homePage;
-    private RegistrationFirstPageObject registrationFirstPageObject;
+   // private RegistrationFirstPageObject registrationFirstPageObject;
     private UserExistsPageObject userExistsPageObject;
     private RegSecondPageObject regSecondPageObject;
+    private RegistrationFP registrationFirstPageObject;
 
 
     @Before
