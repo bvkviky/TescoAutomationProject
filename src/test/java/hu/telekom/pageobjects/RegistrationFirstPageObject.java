@@ -4,44 +4,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegistrationFirstPageObject extends BasePage {
 
     public RegistrationFirstPageObject (WebDriver driver) {
         super(driver);
-        emailInput.shouldBe(visible);
-
 
     }
 
-    //UI Elements
     @FindBy(xpath = "//button[@class='button button-primary']")
     WebElement nextButton;
-
     @FindBy(xpath = "//*[@id=\"email\"]")
     WebElement emailInput;
-
     @FindBy(xpath = "//input[@id='password']")
     WebElement passwordInput;
-
     @FindBy(xpath = "//input[@id='confirm-password']")
     WebElement passwordConfirmInput;
+    @FindBy(xpath = "//div[@class='errors']/ul/li")
+    List<WebElement> pwListErrors;
 
 
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li")
-    WebElement atLeastOneNumberError;
-
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li[1]")
-    WebElement atLeastOneNumberAndCharacterError;
-
-    @FindBy(xpath = "//*[@id=\"content\"]/div/div[1]/div/div[2]/section/div/div/form/ul/li[2]/div/div/ul/li")
-    WebElement atLeastOneCharacter;
-
-
-    //Methods
     public void clickOnNext () {
         nextButton.click();
     }
@@ -88,7 +74,6 @@ public class RegistrationFirstPageObject extends BasePage {
         return email.toString();
     }
 
-
     public UserExistsPageObject registrationWithExisting (String email, String password) {
 
         emailInput.sendKeys(email);
@@ -96,7 +81,6 @@ public class RegistrationFirstPageObject extends BasePage {
         passwordConfirmInput.sendKeys(password);
         nextButton.click();
         return new UserExistsPageObject(driver);
-
     }
 
     public RegSecondPageObject registration () {
@@ -109,19 +93,18 @@ public class RegistrationFirstPageObject extends BasePage {
 
     }
 
-
     public void validateErrorMessage (String expectedErrorMessage) {
+        boolean isFound = false;
 
 
-        if (atLeastOneNumberError.isDisplayed()) {
-            assertEquals(expectedErrorMessage, atLeastOneNumberError.getText());
-        } else if (atLeastOneCharacter.isDisplayed()) {
-            assertEquals(expectedErrorMessage, atLeastOneCharacter.getText());
-        } else if (atLeastOneNumberAndCharacterError.isDisplayed()) {
-            assertEquals(expectedErrorMessage, atLeastOneNumberAndCharacterError.getText());
-        } else {
-            throw new AssertionError("Valami nem jó...");
+        for(WebElement pwerror : pwListErrors){
+
+            if (expectedErrorMessage.equals(pwerror.getText())){
+                isFound = true;
+                break;
+            }
         }
+        assertTrue(isFound);
     }
 }
 
