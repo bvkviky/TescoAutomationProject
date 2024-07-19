@@ -12,8 +12,7 @@ public class RegistrationFirstPageObject extends BasePage {
 
     public RegistrationFirstPageObject (WebDriver driver) {
         super(driver);
-        isLoaded(emailInput);
-        isLoaded(emailInput);
+        emailInput.shouldBe(visible);
 
 
     }
